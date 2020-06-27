@@ -1,6 +1,7 @@
 package webb.stephen.countdown.letters;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Word {
 
@@ -12,11 +13,24 @@ public class Word {
 
     private Integer matchLetter;
 
-    Word(String word){
+    public Word(String word){
         this.setDifferentLetter(0) ;
         this.setMatching(new HashMap<>());
         this.setMatchLetter(0);
         this.setWord(word);
+    }
+
+    public boolean canDerive(Word cmp){
+        HashMap<Character,Integer> cmpHash = cmp.getMatching();
+        HashMap<Character,Integer> currHash = this.getMatching();
+        for (Character key: currHash.keySet()) {
+            if (
+                    !(cmpHash.containsKey(key) && cmpHash.get(key) >= currHash.get(key))
+            ){
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -36,6 +50,7 @@ public class Word {
         this.word = word;
         this.parse(word);
     }
+
 
 
     public boolean checkAndIncrement(Character letter,Integer occurrenceCount){

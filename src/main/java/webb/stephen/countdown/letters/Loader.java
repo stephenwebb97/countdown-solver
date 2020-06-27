@@ -17,15 +17,19 @@ public class Loader {
         return new BufferedReader(new FileReader(file));
     }
 
-    static public List<Word> loadJson(String path) throws FileNotFoundException {
+    static public List<Word> loadJson(String path) throws IOException {
         BufferedReader reader = getBufferedReader(path);
         Gson gson = new Gson();
-        return gson.fromJson(reader,new TypeToken<List<Word>>(){}.getType());
+        List<Word> ret =  gson.fromJson(reader,new TypeToken<List<Word>>(){}.getType());
+        reader.close();
+        return ret;
     }
 
     static public void storeJson(String path,List<Word> wordList) throws IOException {
         Gson gson = new Gson();
-        gson.toJson(wordList, new FileWriter(path));
+        FileWriter fileWriter = new FileWriter(path);
+        gson.toJson(wordList, fileWriter);
+        fileWriter.close();
     }
 
 
@@ -40,6 +44,7 @@ public class Loader {
                 wordList.add(new Word(st));
             }
         }
+        reader.close();
         return wordList;
     }
 }

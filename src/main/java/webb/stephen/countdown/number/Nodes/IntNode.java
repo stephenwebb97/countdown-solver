@@ -7,8 +7,12 @@ import java.util.Objects;
 public class IntNode extends Node{
     Integer value;
 
+    private void setValue(Integer value) {
+        this.value = value;
+    }
+
     public IntNode(Integer i){
-        value = i;
+        this.setValue(i);
     }
 
     public IntNode(int i){
@@ -42,5 +46,10 @@ public class IntNode extends Node{
     @Override
     public int hashCode() {
         return Objects.hash(getValue());
+    }
+
+    @Override
+    public String toString() {
+        return getValue().toString();
     }
 }

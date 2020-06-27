@@ -8,14 +8,21 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class SearchQueue extends PriorityQueue<SearchNode> implements Queue<SearchNode> {
+public class SearchQueue extends PriorityQueue<SearchNode>  {
 
-    SearchQueue(Integer goal){
-        new SearchQueue(new IntNode(goal));
+
+    public SearchQueue(Comparator<SearchNode> comparator) {
+        super(comparator);
     }
 
-    SearchQueue(IntNode goal){
+    static SearchQueue createSearchQueue(Integer goal) {
+        return createSearchQueue(new IntNode(goal));
+    }
+
+    static SearchQueue createSearchQueue(IntNode goal){
         Comparator<SearchNode> comparator = new SearchNodeComparator(goal);
-        new PriorityQueue<>(comparator);
+        return new SearchQueue(comparator);
     }
+
+
 }

@@ -1,13 +1,6 @@
 package webb.stephen.countdown.number.Nodes;
 
-public class Node {
-    Node next;
+public abstract class Node {
+    public abstract String toString();
 
-    Node getNext(){
-        return next;
-    }
-
-    void setNext(Node nextIn){
-        next = nextIn;
-    }
 }

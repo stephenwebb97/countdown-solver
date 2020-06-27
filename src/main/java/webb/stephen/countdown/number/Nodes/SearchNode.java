@@ -1,5 +1,6 @@
 package webb.stephen.countdown.number.Nodes;
 
+import com.google.gson.Gson;
 import webb.stephen.countdown.number.SearchQueue;
 
 import java.util.List;
@@ -63,5 +64,12 @@ public class SearchNode extends Node{
 
     public PreviousSearchNode getPrev() {
         return prev;
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(this));
+        return this.getValue().toString();
     }
 }

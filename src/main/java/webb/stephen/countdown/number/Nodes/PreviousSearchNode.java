@@ -20,4 +20,9 @@ public class PreviousSearchNode extends SearchNode {
         super(prev);
         this.setArithmeticNode(node);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + this.getArithmeticNode().toString();
+    }
 }

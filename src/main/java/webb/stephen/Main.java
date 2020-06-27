@@ -9,6 +9,7 @@ import webb.stephen.countdown.letters.WordComparator;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
@@ -79,6 +80,22 @@ public class Main {
             System.out.println("----- Letter results -----");
             for (Word word: results) {
                 System.out.println(word.getWord().toUpperCase());
+            }
+        }
+
+        if (cmd.hasOption("n")){
+            String[] numbersStrings = cmd.getOptionValues("n");
+            List<Integer> numbers = new LinkedList<>();
+            for (String numbersString: numbersStrings) {
+                numbers.add(Integer.parseInt(numbersString));
+            }
+            if (numbers.size() > 1){
+                webb.stephen.countdown.number.Solver solver =
+                        new webb.stephen.countdown.number.Solver(numbers.get(0));
+                for (int i = 1; i < numbers.size(); i++) {
+                    solver.addNumber(numbers.get(i));
+                }
+                solver.solve();
             }
 
         }

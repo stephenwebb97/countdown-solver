@@ -2,6 +2,7 @@ package webb.stephen.countdown.number;
 
 import webb.stephen.countdown.number.Nodes.IntNode;
 import webb.stephen.countdown.number.Nodes.NullArithmeticNode;
+import webb.stephen.countdown.number.Nodes.PreviousSearchNode;
 import webb.stephen.countdown.number.Nodes.SearchNode;
 
 import java.util.ArrayList;
@@ -29,19 +30,24 @@ public class Solver {
         this.goal = goal;
     }
 
-    Solver(Integer goal){
+
+    public Solver(Integer goal){
         this.setGoal(goal);
+        this.setNumbers(new LinkedList<IntNode>());
     }
+
+
+
     private List<IntNode> numbers;
 
 
     public void addNumber(Integer num){
-        numbers.add(new IntNode(num));
+        this.getNumbers().add(new IntNode(num));
     }
 
 
     public void solve(){
-        SearchQueue queue = new SearchQueue(goal);
+        SearchQueue queue = SearchQueue.createSearchQueue(goal);
         for (int i = 0; i < numbers.size(); i++) {
             List<IntNode> currNumber = new LinkedList<IntNode>(numbers);
             currNumber.remove(i);
@@ -51,14 +57,29 @@ public class Solver {
 
     }
 
+    private String solutionToString(SearchNode current){
+        if (current != null)
+            return current.toString() +" " + this.solutionToString(current.getPrev());
+        return "";
+    }
+
     private void solve(SearchQueue queue){
         while (!queue.isEmpty()){
             SearchNode currNode = queue.poll();
+            System.out.println(this.solutionToString(currNode));
             if (currNode.getValue() == goal){
-                System.out.println("Found");
+                System.out.println(this.solutionToString(currNode));
+                System.exit(0);
             }
             currNode.search(queue);
         }
     }
 
+    public List<IntNode> getNumbers() {
+        return numbers;
+    }
+
+    public void setNumbers(List<IntNode> numbers) {
+        this.numbers = numbers;
+    }
 }

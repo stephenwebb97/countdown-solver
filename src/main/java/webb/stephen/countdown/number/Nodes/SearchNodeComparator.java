@@ -14,8 +14,12 @@ public class SearchNodeComparator implements Comparator<SearchNode> {
         inGoal = goal;
     }
 
+    public static Integer howClose(SearchNode currentValue,IntNode goal){
+        return Math.abs(goal.getValue() - currentValue.getValue().getValue());
+    }
+
     private Integer findValue(SearchNode searchNode){
-        return Math.abs(inGoal - searchNode.getValue().getValue());
+        return howClose(searchNode,new IntNode(inGoal));
     }
 
     @Override
@@ -24,9 +28,9 @@ public class SearchNodeComparator implements Comparator<SearchNode> {
         Integer o1Value = findValue(o1);
         Integer o2Value = findValue(o2);
 
-        if (o1Value < o2Value)
+        if (o1Value > o2Value)
             return 1;
-        else if (o1Value > o2Value)
+        else if (o1Value < o2Value)
             return -1;
         return 0;
     }

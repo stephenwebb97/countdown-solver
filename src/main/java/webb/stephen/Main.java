@@ -95,6 +95,7 @@ public class Main {
                 for (int i = 1; i < numbers.size(); i++) {
                     solver.addNumber(numbers.get(i));
                 }
+                System.out.println("----- Number results -----");
                 solver.solve();
             }
 

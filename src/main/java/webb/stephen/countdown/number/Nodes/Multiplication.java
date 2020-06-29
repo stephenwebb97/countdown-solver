@@ -8,6 +8,6 @@ public class Multiplication extends ArithmeticNode {
 
     @Override
     public String toString() {
-        return "-";
+        return "*";
     }
 }
